@@ -25,7 +25,6 @@ const emptyForm = {
   type:         'ACTIVITY',
 }
 
-// ✅ recebe canEdit do DayList
 export default function ActivityList({ tripId, dayId, canEdit = false }) {
   const [activities, setActivities]         = useState([])
   const [loading, setLoading]               = useState(true)
@@ -135,7 +134,7 @@ export default function ActivityList({ tripId, dayId, canEdit = false }) {
             <span className="text-gray-400 font-normal">({activities.length})</span>
           )}
         </p>
-        {/* ✅ botão só aparece para canEdit */}
+        {/* aparece para canEdit */}
         {canEdit && !adding && !editingId && (
           <button
             onClick={() => setAdding(true)}
@@ -234,7 +233,7 @@ export default function ActivityList({ tripId, dayId, canEdit = false }) {
 
                       {/* Ações */}
                       <div className="flex items-center gap-2 shrink-0">
-                        {/* ✅ comentários visíveis para todos */}
+                        {/* comentários visíveis para todos */}
                         <button
                           onClick={() => toggleComments(activity.id)}
                           className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full transition-colors ${
@@ -247,7 +246,7 @@ export default function ActivityList({ tripId, dayId, canEdit = false }) {
                           💬
                         </button>
 
-                        {/* ✅ editar/remover apenas para canEdit */}
+                        {/* editar/remover apenas para canEdit */}
                         {canEdit && (
                           <>
                             <button
