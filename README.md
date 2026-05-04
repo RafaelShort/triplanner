@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="docs/logo.png" alt="Logo" width="120" />
+<img src="docs/logo.png" alt="Logo" width="180" />
 
-# ✈️ TriPlanner
+# TriPlanner
 
 **Planejador de viagens colaborativo**
 
