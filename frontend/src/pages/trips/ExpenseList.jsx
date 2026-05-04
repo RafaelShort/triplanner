@@ -22,7 +22,7 @@ const emptyForm = {
   date:     new Date().toISOString().slice(0, 10),
 }
 
-// ✅ recebe canEdit do TripDetail
+// recebe canEdit do TripDetail
 export default function ExpenseList({ tripId, canEdit = false }) {
   const [expenses, setExpenses]   = useState([])
   const [loading, setLoading]     = useState(true)
@@ -31,7 +31,7 @@ export default function ExpenseList({ tripId, canEdit = false }) {
   const [form, setForm]           = useState(emptyForm)
   const [error, setError]         = useState('')
 
-  // ✅ total derivado do array — nunca dessincroniza do estado local
+  // Não dessincroniza do estado local
   const total = useMemo(
     () => expenses.reduce((sum, e) => sum + Number(e.amount), 0),
     [expenses]
@@ -129,7 +129,7 @@ export default function ExpenseList({ tripId, canEdit = false }) {
             </span>
           </p>
         </div>
-        {/* ✅ botão só aparece para canEdit */}
+        {/* aparece para canEdit */}
         {canEdit && !adding && !editingId && (
           <button
             onClick={() => setAdding(true)}
@@ -232,7 +232,7 @@ export default function ExpenseList({ tripId, canEdit = false }) {
                     <span className="font-bold text-gray-800">
                       R$ {Number(expense.amount).toFixed(2)}
                     </span>
-                    {/* ✅ botões de edição só aparecem para canEdit */}
+                    {/* botões de edição só aparecem para canEdit */}
                     {canEdit && (
                       <div className="flex gap-2">
                         <button
