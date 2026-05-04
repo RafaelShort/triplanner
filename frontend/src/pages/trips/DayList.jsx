@@ -14,7 +14,7 @@ function toInputDate(isoDate) {
   return isoDate.slice(0, 10)
 }
 
-// ✅ recebe tripStartDate e tripEndDate do TripDetail
+// recebe tripStartDate e tripEndDate do TripDetail
 export default function DayList({ tripId, canEdit = false, tripStartDate, tripEndDate }) {
   const [days, setDays]           = useState([])
   const [loading, setLoading]     = useState(true)
@@ -41,8 +41,6 @@ export default function DayList({ tripId, canEdit = false, tripStartDate, tripEn
       setLoading(false)
     }
   }
-
-  console.log('🔎 DayList props:', { tripStartDate, tripEndDate, minDate, maxDate })
 
   // ── Validação client-side ──────────────────────────────────
   function validate() {
