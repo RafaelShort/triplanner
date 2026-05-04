@@ -42,7 +42,7 @@ const updateMemberRole = async (req, res) => {
     return res.status(403).json({ error: true, message: 'Apenas o dono pode alterar permissões' })
   }
 
-  // ✅ filtra por tripId também — evita IDOR entre viagens
+  // filtra por tripId
   const target = await prisma.tripMember.findFirst({
     where: { id, tripId },
   })
@@ -78,7 +78,7 @@ const removeMember = async (req, res) => {
     return res.status(403).json({ error: true, message: 'Apenas o dono pode remover membros' })
   }
 
-  // ✅ filtra por tripId também — evita IDOR entre viagens
+  // filtra por tripId
   const target = await prisma.tripMember.findFirst({
     where: { id, tripId },
   })
