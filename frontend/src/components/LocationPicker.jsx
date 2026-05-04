@@ -15,7 +15,6 @@ function PanTo({ position }) {
   const map = useMap()
   useEffect(() => {
     if (position) map.setView(position, Math.max(map.getZoom(), 13))
-  // ✅ JSON.stringify mais explícito e seguro que .toString()
   }, [JSON.stringify(position), map])
   return null
 }
