@@ -45,7 +45,7 @@ const getMyStats = async (req, res) => {
     }),
   ])
 
-  // ✅ totalMembers — usuários únicos com quem já viajou (sem duplicatas por viagem)
+  // totalMembers — usuários únicos com quem já viajou
   const coMemberRows = await prisma.tripMember.findMany({
     where: {
       trip: { members: { some: { userId } } },
