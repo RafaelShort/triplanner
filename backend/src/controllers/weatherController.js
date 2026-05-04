@@ -14,7 +14,7 @@ const getWeather = async (req, res) => {
     return res.status(500).json({ error: true, message: 'API Key não configurada' })
   }
 
-  // ✅ try/catch para erros do axios (cidade inválida, quota excedida, etc.)
+  // try/catch para erros do axios
   let currentResponse, forecastResponse
   try {
     ;[currentResponse, forecastResponse] = await Promise.all([
