@@ -124,27 +124,26 @@ const updateTrip = async (req, res) => {
     })
   }
 
-  // ✅ verifica se há dias da viagem fora do novo range
-  if (finalStart && finalEnd) {
-    const daysOutOfRange = await prisma.day.findMany({
-      where: {
-        tripId: id,
-        date:   { not: null },
-        OR: [
-          { date: { lt: parseDate(finalStart) } },
-          { date: { gt: parseDate(finalEnd)   } },
-        ],
-      },
-      select: { date: true, title: true },
-    })
+// ✅ verifica se há dias da viagem fora do novo range
+if (finalStart && finalEnd) {
+  const daysOutOfRange = await prisma.day.findMany({
+    where: {
+      tripId: id,
+      OR: [
+        { date: { lt: parseDate(finalStart) } },
+        { date: { gt: parseDate(finalEnd)   } },
+      ],
+    },
+    select: { date: true, title: true },
+  })
 
-    if (daysOutOfRange.length > 0) {
-      return res.status(400).json({
-        error: true,
-        message: `Existem ${daysOutOfRange.length} dia(s) da viagem fora do novo range. Ajuste-os ou remova-os antes de alterar as datas.`,
-      })
-    }
+  if (daysOutOfRange.length > 0) {
+    return res.status(400).json({
+      error: true,
+      message: `Existem ${daysOutOfRange.length} dia(s) da viagem fora do novo range. Ajuste-os ou remova-os antes de alterar as datas.`,
+    })
   }
+}
 
   const coverImage = req.file
     ? `${process.env.BACKEND_URL || 'http://localhost:3001'}/uploads/${req.file.filename}`
