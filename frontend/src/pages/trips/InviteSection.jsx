@@ -8,7 +8,7 @@ const STATUS_LABEL = {
   EXPIRED:  { label: '⌛ Expirado', className: 'bg-gray-50 text-gray-500 border-gray-200' },
 }
 
-// ✅ recebe myRole do TripDetail
+// recebe myRole do TripDetail
 export default function InviteSection({ tripId, myRole }) {
   const [invitations, setInvitations] = useState([])
   const [loading, setLoading]         = useState(true)
@@ -17,7 +17,7 @@ export default function InviteSection({ tripId, myRole }) {
   const [error, setError]             = useState('')
   const [copiedId, setCopiedId]       = useState(null)
 
-  // ✅ só OWNER e EDITOR podem convidar
+  // só OWNER e EDITOR podem convidar
   const canInvite = ['OWNER', 'EDITOR'].includes(myRole)
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function InviteSection({ tripId, myRole }) {
         <h2 className="text-xl font-semibold">📨 Convites</h2>
       </div>
 
-      {/* ✅ formulário visível apenas para OWNER e EDITOR */}
+      {/* formulário visível apenas para OWNER e EDITOR */}
       {canInvite ? (
         <div className="flex gap-2 mb-4">
           <input
@@ -135,7 +135,7 @@ export default function InviteSection({ tripId, myRole }) {
                     {status.label}
                   </span>
 
-                  {/* ✅ ações de cancelar/copiar só para quem pode convidar */}
+                  {/* ações de cancelar/copiar só para quem pode convidar */}
                   {canInvite && invite.status === 'PENDING' && (
                     <>
                       <button
