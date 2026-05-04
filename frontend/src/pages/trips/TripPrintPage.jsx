@@ -56,22 +56,13 @@ export default function TripPrintPage() {
   }
 
 async function handleExportPDF() {
-  console.log('🔵 [1] Botão clicado')
   setExporting(true)
   try {
-    console.log('🔵 [2] Importando jsPDF...')
     const { jsPDF } = await import('jspdf')
-    console.log('🔵 [3] jsPDF importado:', typeof jsPDF)
-
-    console.log('🔵 [4] Importando html2canvas...')
     const { default: html2canvas } = await import('html2canvas-pro')
-    console.log('🔵 [5] html2canvas importado:', typeof html2canvas)
-
     const element = printRef.current
-    console.log('🔵 [6] Elemento ref:', element)
+    
     if (!element) throw new Error('Elemento não encontrado')
-
-    console.log('🔵 [7] Renderizando canvas...')
     const canvas = await html2canvas(element, {
       scale: 2,
       useCORS: true,
@@ -79,7 +70,6 @@ async function handleExportPDF() {
       backgroundColor: '#ffffff',
       logging: true,
     })
-    console.log('🔵 [8] Canvas pronto:', canvas.width, 'x', canvas.height)
 
     const imgData = canvas.toDataURL('image/png')
     const pdf = new jsPDF('p', 'mm', 'a4')
@@ -100,11 +90,8 @@ async function handleExportPDF() {
       heightLeft -= pdfPageHeight
     }
 
-    console.log('🔵 [9] Salvando PDF...')
     pdf.save(`${trip?.name || 'itinerario'}.pdf`)
-    console.log('🟢 [10] PDF salvo com sucesso!')
   } catch (err) {
-    console.error('🔴 Erro ao gerar PDF:', err)
     alert('Erro ao gerar PDF: ' + err.message)
   } finally {
     setExporting(false)
@@ -227,7 +214,6 @@ async function handleExportPDF() {
               </h2>
               <div className="flex flex-col gap-6">
                 {days.map((day, index) => {
-                  // ✅ Corrigido: ordenar por startTime
                   const dayActivities = (activities[day.id] || [])
                     .slice()
                     .sort((a, b) =>
@@ -269,7 +255,7 @@ async function handleExportPDF() {
                               key={activity.id}
                               className="px-4 py-3 flex gap-3 items-start"
                             >
-                              {/* ✅ Corrigido: startTime */}
+                              {/* startTime */}
                               {activity.startTime && (
                                 <span className="text-xs text-blue-600 font-semibold bg-blue-50 px-2 py-1 rounded shrink-0 mt-0.5">
                                   {activity.startTime}
@@ -279,13 +265,13 @@ async function handleExportPDF() {
                                 <p className="font-medium text-sm text-gray-800">
                                   {activity.title}
                                 </p>
-                                {/* ✅ Corrigido: locationName */}
+                                {/* locationName */}
                                 {activity.locationName && (
                                   <p className="text-xs text-gray-400 mt-0.5">
                                     📍 {activity.locationName}
                                   </p>
                                 )}
-                                {/* ✅ Corrigido: description */}
+                                {/* description */}
                                 {activity.description && (
                                   <p className="text-xs text-gray-500 mt-1 italic">
                                     {activity.description}
