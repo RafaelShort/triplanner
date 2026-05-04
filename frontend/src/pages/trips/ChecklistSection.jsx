@@ -45,7 +45,7 @@ const CATEGORIES = [
   },
 ]
 
-// ✅ recebe canEdit do TripDetail
+// recebe canEdit do TripDetail
 export default function ChecklistSection({ tripId, canEdit = false }) {
   const [items, setItems]                 = useState([])
   const [loading, setLoading]             = useState(true)
