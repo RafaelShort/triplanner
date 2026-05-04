@@ -24,7 +24,7 @@ model User {
   expensesPaid      Expense[]
   expenseSplits     ExpenseSplit[]
   checklistItems    ChecklistItem[]
-  comments          Comment[]       // ← novo
+  comments          Comment[]       
 
   @@map("users")
 }
