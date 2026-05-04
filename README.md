@@ -156,6 +156,9 @@ viajantes, tudo em uma interface responsiva.
 ### 👥 Membros e Convites
 <img src="docs/screenshots/06-members.png" width="700" />
 
+### ☀️ Temperatura
+<img src="docs/screenshots/07-climate.png" width="700" />
+
 </div>
 
 ---
