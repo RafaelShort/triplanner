@@ -11,7 +11,7 @@ export async function exportToPdf(elementId, filename = 'viagem.pdf') {
   try {
     const canvas = await html2canvas(element, {
       scale: 2,
-      useCORS: true,           // permite imagens externas
+      useCORS: true,           
       allowTaint: true,
       backgroundColor: '#ffffff',
       logging: false,
