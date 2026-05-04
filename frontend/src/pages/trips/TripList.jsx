@@ -1,13 +1,13 @@
 import { useState, useEffect, useMemo } from 'react'
 import { Link } from 'react-router-dom'
-import { useAuth } from '../../contexts/AuthContext' // ✅ importado
+import { useAuth } from '../../contexts/AuthContext' 
 import api from '../../services/api'
 import { getFileUrl } from '../../utils/getFileUrl'
 import { notify } from '../../utils/toast'
 import DashboardStats from '../../components/DashboardStats'
 
 export default function TripList() {
-  const { user }    = useAuth() // ✅ usuário logado
+  const { user }    = useAuth() 
   const [trips, setTrips]     = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError]     = useState('')
@@ -59,7 +59,6 @@ export default function TripList() {
     return badges[status] || null
   }
 
-  // ✅ helper para pegar o papel do usuário logado em cada viagem
   function getMyRole(trip) {
     return trip.members?.find((m) => m.userId === user?.id)?.role
   }
@@ -83,7 +82,6 @@ const filteredAndSorted = useMemo(() => {
       break
 
     case 'date':
-      // 📆 Próximas a acontecer primeiro (asc), sem data no fim
       result = [...result].sort((a, b) => {
         if (!a.startDate && !b.startDate) return 0
         if (!a.startDate) return 1
@@ -94,7 +92,6 @@ const filteredAndSorted = useMemo(() => {
 
     case 'recent':
     default:
-      // 📅 Viagens com data mais recente primeiro (desc), sem data no fim
       result = [...result].sort((a, b) => {
         if (!a.startDate && !b.startDate) {
           return new Date(b.createdAt) - new Date(a.createdAt)
@@ -214,7 +211,7 @@ const filteredAndSorted = useMemo(() => {
           {filteredAndSorted.map((trip) => {
             const badge    = getStatusBadge(trip)
             const coverSrc = getFileUrl(trip.coverImage)
-            const myRole   = getMyRole(trip) // ✅ papel do usuário nessa viagem
+            const myRole   = getMyRole(trip)
 
             return (
               <div
@@ -299,7 +296,7 @@ const filteredAndSorted = useMemo(() => {
                     >
                       Ver detalhes
                     </Link>
-                    {/* ✅ Editar visível apenas para OWNER e EDITOR */}
+                    {/* Editar visível apenas para OWNER e EDITOR */}
                     {['OWNER', 'EDITOR'].includes(myRole) && (
                       <Link
                         to={`/trips/${trip.id}/edit`}
@@ -308,7 +305,7 @@ const filteredAndSorted = useMemo(() => {
                         Editar
                       </Link>
                     )}
-                    {/* ✅ Deletar visível apenas para OWNER */}
+                    {/* Deletar visível apenas para OWNER */}
                     {myRole === 'OWNER' && (
                       <button
                         onClick={() => handleDelete(trip.id, trip.name)}
