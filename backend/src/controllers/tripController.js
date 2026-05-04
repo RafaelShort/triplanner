@@ -1,7 +1,7 @@
 const prisma = require('../lib/prisma')
 
 // ── Helpers ───────────────────────────────────────────────────
-// Converte "YYYY-MM-DD" → Date em UTC meio-dia (sem timezone shift)
+// Converte "YYYY-MM-DD" → Date em UTC meio-dia
 function parseDate(dateStr) {
   if (!dateStr) return null
   const [year, month, day] = dateStr.slice(0, 10).split('-').map(Number)
@@ -24,7 +24,7 @@ const createTrip = async (req, res) => {
     })
   }
 
-  // ✅ valida endDate >= startDate
+  // valida endDate >= startDate
   if (startDate && endDate && endDate < startDate) {
     return res.status(400).json({
       error: true,
@@ -107,7 +107,7 @@ const updateTrip = async (req, res) => {
     return res.status(403).json({ error: true, message: 'Sem permissão para editar esta viagem' })
   }
 
-  // ✅ buscar viagem atual para validar consistência das datas
+  // buscar viagem atual para validar consistência das datas
   const current = await prisma.trip.findUnique({ where: { id } })
   if (!current) {
     return res.status(404).json({ error: true, message: 'Viagem não encontrada' })
@@ -124,7 +124,7 @@ const updateTrip = async (req, res) => {
     })
   }
 
-// ✅ verifica se há dias da viagem fora do novo range
+// verifica se há dias da viagem fora do novo range
 if (finalStart && finalEnd) {
   const daysOutOfRange = await prisma.day.findMany({
     where: {
