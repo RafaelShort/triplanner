@@ -55,7 +55,7 @@ export default function TripForm() {
     e.preventDefault()
     setError('')
 
-    // ✅ validação de datas no frontend
+    // validação de datas no frontend
     if (form.startDate && form.endDate && form.endDate < form.startDate) {
       setError('A data de fim não pode ser anterior à data de início')
       return
@@ -144,7 +144,7 @@ export default function TripForm() {
               type="date"
               name="startDate"
               value={form.startDate}
-              max={form.endDate || undefined}    // ✅ NOVO: impede start > end no picker
+              max={form.endDate || undefined}   
               onChange={handleChange}
               className="w-full border rounded px-3 py-2"
             />
