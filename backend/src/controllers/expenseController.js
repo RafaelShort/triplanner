@@ -100,7 +100,7 @@ const updateExpense = async (req, res) => {
     return res.status(403).json({ error: true, message: 'Sem permissão para editar esta viagem' })
   }
 
-  // ✅ valida amount antes de converter para evitar NaN no banco
+  // valida antes de converter para evitar NaN no banco
   if (amount !== undefined && (isNaN(amount) || Number(amount) <= 0)) {
     return res.status(400).json({ error: true, message: 'Valor inválido' })
   }
@@ -108,7 +108,7 @@ const updateExpense = async (req, res) => {
   const expense = await prisma.expense.update({
     where: { id },
     data: {
-      // ✅ spread condicional — só atualiza campos enviados
+      // só atualiza campos enviados
       ...(title    !== undefined && { title }),
       ...(amount   !== undefined && { amount: Number(amount) }),
       ...(category !== undefined && { category: category || null }),
@@ -148,7 +148,7 @@ const deleteExpense = async (req, res) => {
 const toggleSplitPaid = async (req, res) => {
   const { id } = req.params
 
-  // ✅ inclui tripId via expense para verificar autorização
+  // inclui tripId via expense para verificar autorização
   const split = await prisma.expenseSplit.findUnique({
     where: { id },
     include: { expense: { select: { tripId: true } } },
@@ -158,7 +158,7 @@ const toggleSplitPaid = async (req, res) => {
     return res.status(404).json({ error: true, message: 'Divisão não encontrada' })
   }
 
-  // ✅ verifica que o usuário é membro da viagem
+  // verifica que o usuário é membro da viagem
   const member = await prisma.tripMember.findFirst({
     where: { tripId: split.expense.tripId, userId: req.userId },
   })
