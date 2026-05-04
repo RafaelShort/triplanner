@@ -1,7 +1,7 @@
 const prisma = require('../lib/prisma')
 
 // ── Helpers ───────────────────────────────────────────────────
-// Converte "YYYY-MM-DD" → Date em UTC meio-dia (sem timezone shift)
+// Converte "YYYY-MM-DD" → Date em UTC meio-dia
 function parseDate(dateStr) {
   if (!dateStr) return null
   const [year, month, day] = dateStr.slice(0, 10).split('-').map(Number)
