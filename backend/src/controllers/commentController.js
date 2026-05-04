@@ -75,7 +75,7 @@ const updateComment = async (req, res) => {
     return res.status(400).json({ error: true, message: 'O comentário não pode estar vazio' })
   }
 
-  // ✅ verifica que o usuário ainda é membro da viagem
+  // verifica que o usuário ainda é membro da viagem
   const member = await prisma.tripMember.findFirst({
     where: { tripId, userId: req.userId },
   })
