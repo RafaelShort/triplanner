@@ -71,7 +71,7 @@ export default function ActivityComments({ tripId, activityId }) {
 
   async function handleSend() {
     if (!content.trim()) return
-    setError('') // ✅ limpa erro antes de nova operação
+    setError('') 
     setSending(true)
     try {
       const response = await api.post(
@@ -90,7 +90,7 @@ export default function ActivityComments({ tripId, activityId }) {
 
   async function handleUpdate(commentId) {
     if (!editContent.trim()) return
-    setError('') // ✅ limpa erro antes de nova operação
+    setError('') 
     try {
       const response = await api.put(
         `/trips/${tripId}/activities/${activityId}/comments/${commentId}`,
@@ -108,14 +108,13 @@ export default function ActivityComments({ tripId, activityId }) {
 
   async function handleDelete(commentId) {
     if (!confirm('Remover este comentário?')) return
-    setError('') // ✅ limpa erro antes de nova operação
+    setError('') 
     try {
       await api.delete(
         `/trips/${tripId}/activities/${activityId}/comments/${commentId}`
       )
       setComments((prev) => prev.filter((c) => c.id !== commentId))
     } catch {
-      // ✅ usa error state em vez de alert()
       setError('Erro ao remover comentário')
     }
   }
@@ -123,7 +122,7 @@ export default function ActivityComments({ tripId, activityId }) {
   function startEdit(comment) {
     setEditingId(comment.id)
     setEditContent(comment.content)
-    setError('') // ✅ limpa erro ao iniciar edição
+    setError('') 
     setTimeout(() => textareaRef.current?.focus(), 50)
   }
 
@@ -246,7 +245,7 @@ export default function ActivityComments({ tripId, activityId }) {
       <div className="flex gap-2 items-end border-t pt-3">
         <MiniAvatar name={user?.name} avatarUrl={user?.avatarUrl} />
         <div className="flex-1 flex gap-2 items-end">
-          {/* ✅ substituído fieldSizing por solução cross-browser */}
+          {/* substituído fieldSizing por solução cross-browser */}
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
