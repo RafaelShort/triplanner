@@ -40,7 +40,6 @@ export default function InvitePage() {
       const response = await api.post(`/invitations/${token}/accept`)
       setDone('accepted')
       notify.success('Convite aceito! Bem-vindo à viagem 🎉')
-      // ✅ redireciona direto para a viagem usando tripId retornado pelo backend
       setTimeout(() => navigate(`/trips/${response.data.tripId}`), 2500)
     } catch (err) {
       notify.error(err.response?.data?.message || 'Erro ao aceitar convite')
