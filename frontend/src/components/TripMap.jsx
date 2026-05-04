@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-// ✅ useMapEvents removido — não era usado
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
 import L from 'leaflet'
 import api from '../services/api'
