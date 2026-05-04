@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import { AuthProvider } from './contexts/AuthProvider'  // ✅ vem do novo arquivo
-import { useAuth } from './contexts/AuthContext'         // ✅ hook continua aqui
+import { AuthProvider } from './contexts/AuthProvider'  
+import { useAuth } from './contexts/AuthContext'         
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
 import TripList from './pages/trips/TripList'
