@@ -14,6 +14,6 @@ router.get('/', listInvitations)
 router.post('/', createInvitation)
 router.delete('/:id', cancelInvitation)
 
-// ✅ Rotas /token/:token removidas — registradas diretamente no server.js
+// Rotas registradas diretamente no server.js
 
 module.exports = router
