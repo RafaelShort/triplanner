@@ -120,7 +120,7 @@ const updateActivity = async (req, res) => {
   const activity = await prisma.activity.update({
     where: { id },
     data: {
-      // ✅ spread condicional — só atualiza campos enviados no body
+      // só atualiza campos enviados no body
       ...(title        !== undefined && { title }),
       ...(description  !== undefined && { description:  description  || null }),
       ...(startTime    !== undefined && { startTime:    startTime    || null }),
