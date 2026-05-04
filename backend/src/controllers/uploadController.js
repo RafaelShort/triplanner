@@ -10,12 +10,11 @@ const uploadAvatar = async (req, res) => {
     return res.status(400).json({ error: true, message: 'Nenhum arquivo enviado' })
   }
 
-  // ✅ URL completa — consistente com tripController.js
   const avatarUrl = `${BACKEND_URL}/uploads/${req.file.filename}`
 
   const user = await prisma.user.findUnique({ where: { id: req.userId } })
 
-  // ✅ null check antes de acessar user.avatarUrl
+  // null check antes de acessar user.avatarUrl
   if (!user) {
     return res.status(404).json({ error: true, message: 'Usuário não encontrado' })
   }
@@ -51,12 +50,11 @@ const uploadTripCover = async (req, res) => {
     return res.status(403).json({ error: true, message: 'Sem permissão' })
   }
 
-  // ✅ URL completa — consistente com tripController.js
   const coverImage = `${BACKEND_URL}/uploads/${req.file.filename}`
 
   const trip = await prisma.trip.findUnique({ where: { id: tripId } })
 
-  // ✅ null check antes de acessar trip.coverImage
+  // null check antes de acessar trip.coverImage
   if (!trip) {
     return res.status(404).json({ error: true, message: 'Viagem não encontrada' })
   }
