@@ -13,14 +13,12 @@ export default function Register() {
   const navigate                = useNavigate()
   const [searchParams]          = useSearchParams()
 
-  // ✅ lê o redirect da URL — ex: /register?redirect=/invites/TOKEN
   const redirect = searchParams.get('redirect') || '/trips'
 
   async function handleSubmit(e) {
     e.preventDefault()
     setError('')
 
-    // ✅ validação de senha no frontend
     if (password.length < 6) {
       setError('A senha deve ter no mínimo 6 caracteres')
       return
@@ -29,7 +27,7 @@ export default function Register() {
     setLoading(true)
     try {
       await register(name, email, password)
-      navigate(redirect)          // ✅ respeita o redirect
+      navigate(redirect)        
     } catch (err) {
       setError(err.response?.data?.message || 'Erro ao criar conta. Tente novamente.')
     } finally {
@@ -41,7 +39,7 @@ export default function Register() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 flex items-center justify-center p-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
 
-        {/* ✅ Logo + nome do app */}
+        {/* Logo + nome do app */}
         <div className="flex flex-col items-center mb-6">
           <img
             src="/logo.png"
