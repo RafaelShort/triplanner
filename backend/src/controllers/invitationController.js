@@ -17,7 +17,7 @@ const listInvitations = async (req, res) => {
   const invitations = await prisma.invitation.findMany({
     where: {
       tripId,
-      status: { not: 'CANCELLED' }, // ✅ esconde cancelados
+      status: { not: 'CANCELLED' },
     },
     include: {
       inviter: { select: { id: true, name: true } },
@@ -213,7 +213,7 @@ const acceptInvitation = async (req, res) => {
 
   return res.json({
     message:  'Convite aceito com sucesso!',
-    tripId:   invitation.tripId,     // ✅ usado pelo frontend para redirecionar
+    tripId:   invitation.tripId,    
     tripName: invitation.trip.name,
   })
 }
