@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite' // ← ERA ESSE QUE ESTAVA FALTANDO
+import tailwindcss from '@tailwindcss/vite' 
 
 export default defineConfig({
   plugins: [
@@ -11,7 +11,7 @@ export default defineConfig({
     port: 5173,
     proxy: {
       '/api': {
-        target: 'http://localhost:3001', // redireciona para o backend
+        target: 'http://localhost:3001', 
         changeOrigin: true,
       },
       '/uploads': {
