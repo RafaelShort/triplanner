@@ -75,7 +75,7 @@ export default function TripDetail() {
 
     try {
       const formData = new FormData()
-      formData.append('coverImage', file) // ✅ campo correto — backend usa upload.single('coverImage')
+      formData.append('coverImage', file)
 
       const response = await api.post(`/upload/trips/${id}/cover`, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
@@ -128,7 +128,7 @@ export default function TripDetail() {
           </div>
         )}
 
-        {/* ✅ image/gif adicionado ao accept */}
+        {/* image/gif adicionado ao accept */}
         <input
           ref={coverInputRef}
           type="file"
@@ -209,7 +209,7 @@ export default function TripDetail() {
       {/* Conteúdo das tabs */}
       <div className="mb-6">
         {activeTab === 'days' && (
-          // ✅ canEdit passado para DayList
+          // canEdit passado para DayList
           <DayList
             tripId={trip.id}
             canEdit={canEdit}
@@ -220,7 +220,7 @@ export default function TripDetail() {
 
         {activeTab === 'expenses' && (
           <div className="border rounded-xl p-4 bg-white">
-            {/* ✅ canEdit passado para ExpenseList */}
+            {/* canEdit passado para ExpenseList */}
             <ExpenseList tripId={id} canEdit={canEdit} />
           </div>
         )}
@@ -233,14 +233,14 @@ export default function TripDetail() {
 
         {activeTab === 'invites' && (
           <div className="border rounded-xl p-4 bg-white">
-            {/* ✅ myRole passado para InviteSection */}
+            {/* myRole passado para InviteSection */}
             <InviteSection tripId={id} myRole={myRole} />
           </div>
         )}
 
         {activeTab === 'checklist' && (
           <div className="border rounded-xl p-4 bg-white">
-            {/* ✅ canEdit passado para ChecklistSection */}
+            {/* canEdit passado para ChecklistSection */}
             <ChecklistSection tripId={id} canEdit={canEdit} />
           </div>
         )}
