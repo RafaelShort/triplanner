@@ -50,7 +50,7 @@ const register = async (req, res) => {
     },
   })
 
-  // ── Email de boas-vindas (falha silenciosa) ───────────────
+  // ── Email de boas-vindas ───────────────
   try {
     await sendWelcomeEmail({ to: email, name })
   } catch (mailErr) {
