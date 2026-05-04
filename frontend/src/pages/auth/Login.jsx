@@ -32,7 +32,7 @@ export default function Login() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-orange-50 flex items-center justify-center p-4">
       <div className="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
 
-        {/* ✅ Logo + nome do app */}
+        {/* Logo + nome do app */}
         <div className="flex flex-col items-center mb-6">
           <img
             src="/logo.png"
