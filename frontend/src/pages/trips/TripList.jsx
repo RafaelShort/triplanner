@@ -64,34 +64,49 @@ export default function TripList() {
     return trip.members?.find((m) => m.userId === user?.id)?.role
   }
 
-  const filteredAndSorted = useMemo(() => {
-    let result = trips.filter((trip) => {
-      const term = search.toLowerCase()
-      const matchesSearch =
-        trip.name.toLowerCase().includes(term) ||
-        (trip.destination || '').toLowerCase().includes(term)
-      const matchesFilter =
-        filter === 'all' || getTripStatus(trip) === filter
-      return matchesSearch && matchesFilter
-    })
+const filteredAndSorted = useMemo(() => {
+  let result = trips.filter((trip) => {
+    const term = search.toLowerCase()
+    const matchesSearch =
+      trip.name.toLowerCase().includes(term) ||
+      (trip.destination || '').toLowerCase().includes(term)
+    const matchesFilter =
+      filter === 'all' || getTripStatus(trip) === filter
+    return matchesSearch && matchesFilter
+  })
 
-    switch (sortBy) {
-      case 'name':
-        result = [...result].sort((a, b) => a.name.localeCompare(b.name, 'pt-BR'))
-        break
-      case 'date':
-        result = [...result].sort(
-          (a, b) => new Date(a.startDate || 0) - new Date(b.startDate || 0)
-        )
-        break
-      case 'recent':
-      default:
-        result = [...result].sort(
-          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-        )
-    }
-    return result
-  }, [trips, search, filter, sortBy])
+  switch (sortBy) {
+    case 'name':
+      result = [...result].sort((a, b) =>
+        a.name.localeCompare(b.name, 'pt-BR')
+      )
+      break
+
+    case 'date':
+      // 📆 Próximas a acontecer primeiro (asc), sem data no fim
+      result = [...result].sort((a, b) => {
+        if (!a.startDate && !b.startDate) return 0
+        if (!a.startDate) return 1
+        if (!b.startDate) return -1
+        return new Date(a.startDate) - new Date(b.startDate)
+      })
+      break
+
+    case 'recent':
+    default:
+      // 📅 Viagens com data mais recente primeiro (desc), sem data no fim
+      result = [...result].sort((a, b) => {
+        if (!a.startDate && !b.startDate) {
+          return new Date(b.createdAt) - new Date(a.createdAt)
+        }
+        if (!a.startDate) return 1
+        if (!b.startDate) return -1
+        return new Date(b.startDate) - new Date(a.startDate)
+      })
+  }
+  return result
+}, [trips, search, filter, sortBy])
+
 
   if (loading) return <p className="text-center mt-10">Carregando...</p>
 
